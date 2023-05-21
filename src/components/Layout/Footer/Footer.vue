@@ -105,6 +105,7 @@ export default defineComponent({
     flex-direction: row;
     justify-content: space-around;
     text-align: left;
+    align-items: flex-start;
   }
 }
 </style>
