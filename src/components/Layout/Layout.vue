@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import Footer from "./Footer/Footer.vue";
 import Navbar from "./Navbar/Navbar.vue";
 </script>
 
 <template>
-  <div class="container"><Navbar /><slot></slot></div>
+  <div class="container"><Navbar /><slot></slot><Footer /></div>
 </template>
 
 <style scoped>
