@@ -1,13 +1,18 @@
-<script setup lang="ts">
+<script lang="ts">
+import Layout from "./components/Layout/Layout.vue";
 
+export default {
+  name: "App",
+  components: {
+    Layout,
+  },
+};
 </script>
 
 <template>
-  <div>
-    <button>ssdas</button>
-  </div>
+  <Layout>
+    <router-view></router-view>
+  </Layout>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
