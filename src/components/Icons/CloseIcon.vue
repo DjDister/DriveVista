@@ -1,0 +1,38 @@
+<script lang="ts">
+export default {
+  props: {
+    size: {
+      type: String,
+      default: "24px",
+    },
+    color: {
+      type: String,
+      default: "none",
+    },
+  },
+};
+</script>
+<template>
+  <svg
+    :fill="color"
+    :width="size"
+    :height="size"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+    <g
+      id="SVGRepo_tracerCarrier"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    ></g>
+    <g id="SVGRepo_iconCarrier">
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M19.207 6.207a1 1 0 0 0-1.414-1.414L12 10.586 6.207 4.793a1 1 0 0 0-1.414 1.414L10.586 12l-5.793 5.793a1 1 0 1 0 1.414 1.414L12 13.414l5.793 5.793a1 1 0 0 0 1.414-1.414L13.414 12l5.793-5.793z"
+        fill="inherit"
+      ></path>
+    </g>
+  </svg>
+</template>
