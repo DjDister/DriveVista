@@ -14,6 +14,17 @@ const store = useStore();
 </template>
 
 <style scoped>
+button {
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  border: unset;
+  background-color: inherit;
+}
+
 .btnCont {
   display: flex;
   justify-content: center;
