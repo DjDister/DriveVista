@@ -4,7 +4,7 @@ import { createApp } from "vue";
 import { store } from "./store";
 import { createRouter, createWebHistory } from "vue-router";
 import About from "./pages/About.vue";
-import Home from "./pages/Home.vue";
+import Home from "./pages/Home/Home.vue";
 
 const routes = [
   { path: "/", component: Home },

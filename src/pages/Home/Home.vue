@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import Button from "../components/Button.vue";
-import ArrowRight from "../components/Icons/ArrowRight.vue";
-import BookCarForm from "../components/Forms/BookCarForm.vue";
+import Button from "../../components/Button.vue";
+import ArrowRight from "../../components/Icons/ArrowRight.vue";
+import BookCarForm from "../../components/Forms/BookCarForm.vue";
+import InstructionsElem from "./InstructionsElem.vue";
 </script>
 
 <template>
@@ -30,11 +31,16 @@ import BookCarForm from "../components/Forms/BookCarForm.vue";
       </div>
     </div>
     <div class="welcomeCarImgCont">
-      <img class="welcomeImg" src="../assets/images/welcomeCar.png" alt="car" />
-      <img class="bgCityImg" src="../assets/images/cityBg2.png" alt="city" />
+      <img
+        class="welcomeImg"
+        src="../../assets/images/welcomeCar.png"
+        alt="car"
+      />
+      <img class="bgCityImg" src="../../assets/images/cityBg2.png" alt="city" />
     </div>
   </div>
   <BookCarForm />
+  <InstructionsElem />
 </template>
 
 <style scoped>
