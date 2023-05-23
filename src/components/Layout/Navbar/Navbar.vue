@@ -117,6 +117,7 @@ export default {
   align-items: center;
   height: 100px;
   position: relative;
+  z-index: 10;
 }
 .hideMobile {
   display: none;

@@ -1,10 +1,7 @@
-<script lang="ts">
+<script lang="ts" setup>
 import Button from "../components/Button.vue";
 import ArrowRight from "../components/Icons/ArrowRight.vue";
-export default {
-  name: "Home",
-  components: { Button, ArrowRight },
-};
+import BookCarForm from "../components/Forms/BookCarForm.vue";
 </script>
 
 <template>
@@ -37,6 +34,7 @@ export default {
       <img class="bgCityImg" src="../assets/images/cityBg2.png" alt="city" />
     </div>
   </div>
+  <BookCarForm />
 </template>
 
 <style scoped>

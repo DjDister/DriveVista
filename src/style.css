@@ -20,5 +20,14 @@ body {
 }
 
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #FFC300;
+  height: 10px;
+  border-radius: 100vw;
+}
 
 
