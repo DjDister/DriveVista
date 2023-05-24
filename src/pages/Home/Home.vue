@@ -3,6 +3,7 @@ import Button from "../../components/Button.vue";
 import ArrowRight from "../../components/Icons/ArrowRight.vue";
 import BookCarForm from "../../components/Forms/BookCarForm.vue";
 import InstructionsElem from "./InstructionsElem.vue";
+import CarPresentation from "./CarPresentation.vue";
 </script>
 
 <template>
@@ -41,6 +42,7 @@ import InstructionsElem from "./InstructionsElem.vue";
   </div>
   <BookCarForm />
   <InstructionsElem />
+  <CarPresentation />
 </template>
 
 <style scoped>

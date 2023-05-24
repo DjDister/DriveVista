@@ -9,6 +9,7 @@
         color="#FFD60A"
         size="64px"
         :icon="Car"
+        class="blobCont"
       />
       <BlobIconDesc
         label="Call from Operator"
@@ -16,6 +17,7 @@
         color="#FFD60A"
         size="58px"
         :icon="Operator"
+        class="blobCont"
       />
       <BlobIconDesc
         label="Drive anywhere"
@@ -23,6 +25,7 @@
         color="#FFD60A"
         size="64px"
         :icon="DrivingCar"
+        class="blobCont"
       />
     </div>
   </div>
@@ -63,6 +66,10 @@ import DrivingCar from "../../components/Icons/DrivingCar.vue";
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+  }
+  .blobCont {
+    width: 100%;
+    max-width: 400px;
   }
 }
 </style>
