@@ -85,6 +85,7 @@ export default defineComponent({
   align-items: center;
   text-align: center;
   gap: 40px;
+  padding-bottom: 40px;
 }
 .title {
   font-size: x-large;
