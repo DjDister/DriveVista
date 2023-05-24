@@ -171,11 +171,7 @@ const setChosenCar = (car: CarModelType) => {
   font-weight: 700;
   margin-bottom: 0;
 }
-.blobsCont {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
+
 .title {
   font-size: 2.5rem;
   font-weight: 700;
