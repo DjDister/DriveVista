@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import errorFeedback from "./errorMesssagesAuth";
 import { MutationTypes, useStore } from "../store/store";
+import writeUserToDb from "./writeUserToDb";
 
 const registerUser = async (formData: {
   password: string;
@@ -15,12 +16,13 @@ const registerUser = async (formData: {
       formData.login,
       formData.password
     )
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         const userInfo = {
           email: userCredential.user.email ?? "",
           uid: userCredential.user.uid,
         };
         store.commit(MutationTypes.LOG_IN, userInfo);
+        await writeUserToDb(userInfo);
       })
       .catch((error) => {
         return (

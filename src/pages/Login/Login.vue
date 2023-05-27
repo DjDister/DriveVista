@@ -300,6 +300,7 @@ input {
   align-items: center;
   width: 100%;
   height: 50%;
+  cursor: pointer;
   background-color: #5465ff;
   color: white;
   border-radius: 6px;
@@ -397,6 +398,7 @@ input {
   align-items: center;
   color: #d3d3d3;
   font-family: arial;
+  cursor: pointer;
 }
 
 .rightSide {
