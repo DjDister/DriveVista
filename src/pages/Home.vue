@@ -1,6 +1,12 @@
 <script lang="ts">
 import Button from "../components/Button.vue";
 import ArrowRight from "../components/Icons/ArrowRight.vue";
+import { useCollection } from "vuefire";
+import { collection } from "firebase/firestore";
+import { db } from "../../firebase";
+
+const cars = useCollection(collection(db, "cars"));
+console.log(cars.value[0]);
 export default {
   name: "Home",
   components: { Button, ArrowRight },
