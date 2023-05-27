@@ -5,6 +5,8 @@ import { store } from "./store";
 import { createRouter, createWebHistory } from "vue-router";
 import About from "./pages/About.vue";
 import Home from "./pages/Home.vue";
+import { firebaseApp } from "../firebase";
+import { VueFire, VueFireAuth } from "vuefire";
 
 const routes = [
   { path: "/", component: Home },
@@ -18,5 +20,9 @@ const router = createRouter({
 const app = createApp(App);
 app.use(router);
 app.use(store);
+app.use(VueFire, {
+  firebaseApp,
+  modules: [VueFireAuth()],
+});
 
 app.mount("#app");
