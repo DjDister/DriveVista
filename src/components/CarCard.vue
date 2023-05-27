@@ -36,11 +36,11 @@ import Seats from "./Icons/Seats.vue";
 import Fuel from "./Icons/Fuel.vue";
 defineProps({
   name: String,
-  price: String,
+  price: Number,
   image: String,
   year: String,
   transmission: String,
-  seats: String,
+  seats: Number,
   fuel: String,
 });
 </script>
