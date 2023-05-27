@@ -1,14 +1,49 @@
 <script setup lang="ts">
-import { useStore } from "../../store";
+import { useRouter } from "vue-router";
+import { MutationTypes } from "../../store/store";
+import { useStore } from "../../store/store";
 
 const store = useStore();
+const router = useRouter();
+const logOut = () => {
+  store.commit(MutationTypes.LOG_OUT, undefined);
+};
+const navigateToLogin = (registerMode: boolean) => {
+  if (registerMode)
+    router.push({
+      name: "Login",
+      query: {
+        registerModeDefault: "true",
+      },
+    });
+  else router.push("/login");
+};
 </script>
 
 <template>
   <div>
-    <div v-show="!store.state.isLoggedIn" class="btnCont">
-      <button class="loginBtn">Sign in</button>
-      <button class="registerBtn">Sign up</button>
+    <div class="btnCont">
+      <button
+        @click="navigateToLogin(false)"
+        v-show="!store.state.isLoggedIn"
+        class="loginBtn"
+      >
+        Sign in
+      </button>
+      <button
+        @click="navigateToLogin(true)"
+        v-show="!store.state.isLoggedIn"
+        class="registerBtn"
+      >
+        Sign up
+      </button>
+      <button
+        @click="logOut"
+        v-show="store.state.isLoggedIn"
+        class="registerBtn"
+      >
+        Log out
+      </button>
     </div>
   </div>
 </template>
