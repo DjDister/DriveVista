@@ -2,6 +2,7 @@
   <div class="pageCont">
     <h1>Models</h1>
     <div class="modelsCont">
+      <LoadingStatus class="loadingSpinner" v-if="cars.length === 0" />
       <CarCard
         v-for="car in cars"
         :key="car.id"
@@ -21,6 +22,7 @@ import CarCard from "../../components/CarCard.vue";
 import { onMounted, ref } from "vue";
 import getCars from "../../utils/getCars";
 import { Car } from "../../../types";
+import LoadingStatus from "../../components/LoadingStatus.vue";
 
 const cars = ref<Car[]>([]);
 
@@ -36,6 +38,12 @@ onMounted(() => {
 </script>
 
 <style scoped lang="css">
+.loadingSpinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .modelsCont {
   display: flex;
   flex-wrap: wrap;
