@@ -1,6 +1,6 @@
 import { Store } from "vuex";
 import { InjectionKey } from "vue";
-import { State } from "./store";
+import { State } from "./store/store";
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {

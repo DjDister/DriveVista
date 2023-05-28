@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import Button from "../../components/Button.vue";
 import ArrowRight from "../../components/Icons/ArrowRight.vue";
 import BookCarForm from "../../components/Forms/BookCarForm.vue";
 import InstructionsElem from "./InstructionsElem.vue";
