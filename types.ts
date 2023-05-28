@@ -21,3 +21,11 @@ export type Car = {
   fuel: string;
   image: string;
 };
+
+export interface CarFormData {
+  pickUpDate: string;
+  dropOffDate: string;
+  carId: string;
+  pickUpLocation: string;
+  dropOffLocation: string;
+}

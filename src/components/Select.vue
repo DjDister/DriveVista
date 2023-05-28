@@ -1,5 +1,5 @@
 <script setup lang="ts">
-interface Option {
+export interface Option {
   id: number;
   name: string;
   value: string;

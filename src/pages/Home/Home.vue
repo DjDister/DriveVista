@@ -4,6 +4,20 @@ import BookCarForm from "../../components/Forms/BookCarForm.vue";
 import InstructionsElem from "./InstructionsElem.vue";
 import CarPresentation from "./CarPresentation.vue";
 import FaqElem from "./FaqElem.vue";
+import { Car } from "../../../types";
+import getCars from "../../utils/getCars";
+import { onMounted, ref } from "vue";
+const cars = ref<Car[]>([]);
+
+const fetchCars = async () => {
+  await getCars(6).then((res) => {
+    cars.value = res;
+  });
+};
+
+onMounted(() => {
+  fetchCars();
+});
 </script>
 
 <template>
@@ -40,9 +54,9 @@ import FaqElem from "./FaqElem.vue";
       <img class="bgCityImg" src="../../assets/images/cityBg2.png" alt="city" />
     </div>
   </div>
-  <BookCarForm />
+  <BookCarForm :carTypes="cars" />
   <InstructionsElem />
-  <CarPresentation />
+  <CarPresentation :cars="cars" />
   <FaqElem />
 </template>
 

@@ -2,94 +2,73 @@
   <div class="presentationCont">
     <h2 class="subTitle">Car Models</h2>
     <h1 class="title">Our rental fleet</h1>
-    <div class="detailsCont">
+    <div class="detailsCont" v-if="chosenCar">
       <div class="modelsCont">
         <button
           @click="setChosenCar(car)"
           class="modelName"
           v-for="car in carModels"
+          :key="car.id"
         >
           {{ car.name }}
         </button>
       </div>
-      <img class="carImg" src="https://picsum.photos/200/300" />
+      <img class="carImg" :src="chosenCar.image" />
       <div class="statsTable">
         <div class="priceTitle">{{ chosenCar.price }}$/ rent per day</div>
-        <div class="optionRow" v-for="option in chosenCarOptions">
+        <div
+          class="optionRow"
+          v-for="option in chosenCarOptions"
+          :key="option.optionName"
+        >
           <div class="option">{{ option.optionName }}</div>
           <div class="line"></div>
           <div class="option">{{ option.optionValue }}</div>
         </div>
       </div>
     </div>
+    <div v-else>Loading...</div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from "vue";
-type CarModelType = {
-  name: string;
-  mark: string;
-  model: string;
-  img: string;
-  seats: number;
-  doors: number;
-  transmission: string;
-  fuel: string;
-  price: number;
-  productionYear: number;
-};
+import { PropType, computed, ref, watchEffect } from "vue";
+import { Car } from "../../../types";
 
-const carModels: CarModelType[] = [
-  {
-    name: "Audi A4",
-    mark: "Audi",
-    model: "A4",
-    img: "audiA4",
-    seats: 5,
-    doors: 4,
-    transmission: "Automatic",
-    fuel: "Diesel",
-    price: 100,
-    productionYear: 2019,
+const props = defineProps({
+  cars: {
+    type: Array as PropType<Car[]>,
+    required: true,
   },
-  {
-    name: "Audi A6",
-    mark: "Audi",
-    model: "A6",
-    img: "audiA6",
-    seats: 5,
-    doors: 4,
-    transmission: "Automatic",
+});
 
-    fuel: "Diesel",
-    price: 120,
-    productionYear: 2020,
-  },
-  {
-    name: "VW Golf 6",
-    mark: "Volkswagen",
-    model: "Golf 6",
-    img: "golf6",
-    seats: 5,
-    doors: 4,
-    transmission: "Manual",
-    fuel: "Diesel",
-    price: 80,
-    productionYear: 2015,
-  },
-];
-const chosenCar = ref(carModels[0]);
-const chosenCarOptions = computed(() => [
-  { optionName: "Seats", optionValue: chosenCar.value.seats },
-  { optionName: "Doors", optionValue: chosenCar.value.doors },
-  { optionName: "Transmission", optionValue: chosenCar.value.transmission },
-  { optionName: "Fuel", optionValue: chosenCar.value.fuel },
-  { optionName: "Year", optionValue: chosenCar.value.productionYear },
-]);
-const setChosenCar = (car: CarModelType) => {
+const chosenCar = ref<Car | null>(null);
+const carModels = computed(() => {
+  return props.cars;
+});
+
+const chosenCarOptions = computed(() => {
+  if (chosenCar.value) {
+    return [
+      { optionName: "Seats", optionValue: chosenCar.value.seats },
+      { optionName: "Doors", optionValue: chosenCar.value.doors },
+      { optionName: "Transmission", optionValue: chosenCar.value.transmission },
+      { optionName: "Fuel", optionValue: chosenCar.value.fuel },
+      { optionName: "Year", optionValue: chosenCar.value.productionYear },
+    ];
+  }
+  return [];
+});
+
+const setChosenCar = (car: Car): void => {
   chosenCar.value = car;
 };
+
+watchEffect(() => {
+  if (props.cars.length > 0 && !chosenCar.value) {
+    chosenCar.value = props.cars[0];
+  }
+});
 </script>
 
 <style scoped lang="css">
@@ -146,6 +125,7 @@ const setChosenCar = (car: CarModelType) => {
   padding: 15px;
   box-sizing: border-box;
   width: 100%;
+  cursor: pointer;
   border: none;
 }
 .modelsCont {
@@ -165,6 +145,7 @@ const setChosenCar = (car: CarModelType) => {
   text-align: center;
   margin-top: 5rem;
   width: 90%;
+  min-height: 530.7px;
 }
 .subTitle {
   font-size: 1.5rem;
