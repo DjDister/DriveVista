@@ -19,4 +19,5 @@ export type Car = {
   transmission: string;
   doors: number;
   fuel: string;
+  image: string;
 };

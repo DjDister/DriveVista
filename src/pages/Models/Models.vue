@@ -4,13 +4,14 @@
     <div class="modelsCont">
       <LoadingStatus class="loadingSpinner" v-if="cars.length === 0" />
       <CarCard
+        loadingIndicator
         v-for="car in cars"
         :key="car.id"
         :name="car.name"
         :price="car.price"
         :transmission="car.transmission"
         :fuel="car.fuel"
-        image="https://via.placeholder.com/150"
+        :image="car.image"
         :seats="car.seats"
       />
     </div>

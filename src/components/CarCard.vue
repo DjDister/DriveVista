@@ -1,6 +1,16 @@
 <template>
   <div class="carCard">
-    <img class="carCardImg" :src="image" alt="car image" />
+    <LoadingStatus
+      class="loadingIndicator"
+      v-if="!isImgLoaded && loadingIndicator"
+    />
+    <img
+      class="carCardImg"
+      :class="{ loadingImg: !isImgLoaded }"
+      @load="() => (loadingIndicator ? handleImageLoad() : null)"
+      :src="image"
+      alt="car image"
+    />
 
     <div class="carCardInfo">
       <h3 class="carCardTitle">{{ name?.toUpperCase() }}</h3>
@@ -34,6 +44,8 @@
 import Transmission from "./Icons/Transmission.vue";
 import Seats from "./Icons/Seats.vue";
 import Fuel from "./Icons/Fuel.vue";
+import LoadingStatus from "./LoadingStatus.vue";
+import { ref } from "vue";
 defineProps({
   name: String,
   price: Number,
@@ -42,10 +54,23 @@ defineProps({
   transmission: String,
   seats: Number,
   fuel: String,
+  loadingIndicator: Boolean,
 });
+
+const isImgLoaded = ref(false);
+
+const handleImageLoad = () => {
+  isImgLoaded.value = true;
+};
 </script>
 
 <style scoped>
+.loadingImg {
+  height: 0;
+}
+.loadingIndicator {
+  min-height: 260px;
+}
 .iconDetail {
   display: flex;
   align-items: center;
