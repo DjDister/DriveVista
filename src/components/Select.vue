@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { ref, watch } from "vue";
+
 export interface Option {
   id: number;
   name: string;
   value: string;
 }
-
-defineProps({
+const props = defineProps({
   type: {
     type: String,
     default: "text",
@@ -31,6 +32,14 @@ defineProps({
     default: false,
   },
 });
+
+const selectedValue = ref(props.value);
+watch(
+  () => props.value,
+  (newValue) => {
+    selectedValue.value = newValue;
+  }
+);
 </script>
 
 <template>
@@ -39,7 +48,7 @@ defineProps({
       <slot name="iconLeft"></slot>{{ label }}
       <div v-if="isNeeded" class="isNeeded">{{ " *" }}</div>
     </div>
-    <select class="selectCont">
+    <select class="selectCont" v-model="selectedValue">
       <option value="">Please select one</option>
       <option
         v-for="option in options"

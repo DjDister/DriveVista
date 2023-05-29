@@ -11,7 +11,7 @@ import { VueFire, VueFireAuth } from "vuefire";
 import Login from "./pages/Login/Login.vue";
 
 const routes = [
-  { path: "/", component: Home },
+  { path: "/", name: "Home", component: Home },
   { path: "/about", component: About },
   {
     path: "/models",

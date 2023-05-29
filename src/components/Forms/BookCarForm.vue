@@ -6,6 +6,7 @@
       isNeeded
       :label="option.label"
       :options="option.options"
+      :value="getSwitchValue(option.value as keyof CarFormData)"
       @input="
         updateFormValue(option.value as keyof CarFormData, $event.target.value)
       "
@@ -53,54 +54,82 @@ import validCarForm from "../../utils/validCarForm";
 import isCarAvaliable from "../../utils/isCarAvaliable";
 import { useStore } from "../../store/store";
 import bookCar from "../../utils/bookCar";
+import { useRouter } from "vue-router";
 const props = defineProps({
   carTypes: {
     type: Array as PropType<CarType[]>,
     required: true,
   },
 });
-
-const form = ref<CarFormData>({
-  pickUpDate: "",
-  dropOffDate: "",
-  carId: "",
-  pickUpLocation: "",
-  dropOffLocation: "",
-});
+const formError = ref("");
+const formSuccess = ref("");
+const store = useStore();
+const route = useRouter();
+const formFromNavigation = route.currentRoute.value.query.filledForm;
+const form = ref<CarFormData>(
+  formFromNavigation
+    ? JSON.parse(formFromNavigation as string)
+    : {
+        pickUpDate: "",
+        dropOffDate: "",
+        carId: "",
+        pickUpLocation: "",
+        dropOffLocation: "",
+      }
+);
 
 const updateFormValue = (key: keyof CarFormData, value: string) => {
   form.value[key] = value;
 };
 
-const formError = ref("");
-const formSuccess = ref("");
-const store = useStore();
+const getSwitchValue = (key: keyof CarFormData) => {
+  return form.value[key];
+};
 
 const submitForm = async () => {
   formError.value = "";
   formSuccess.value = "";
 
   formError.value = validCarForm(form.value);
-  const avaliableStatus = await isCarAvaliable(form.value);
-  if (formError.value === "") {
-    if (avaliableStatus) {
-      if (store.state.isLoggedIn) {
-        await bookCar(form.value, store.state.uid).then(() => {
-          formSuccess.value = "Car booked successfully";
-          form.value = {
-            pickUpDate: "",
-            dropOffDate: "",
-            carId: "",
-            pickUpLocation: "",
-            dropOffLocation: "",
-          };
-        });
-      } else {
-      }
-    } else {
-      formError.value = "Car is not avaliable in this time";
-    }
+
+  const isFormValid = formError.value === "";
+
+  if (!isFormValid) {
+    return;
   }
+
+  const isCarAvailable = await isCarAvaliable(form.value);
+
+  if (isCarAvailable) {
+    if (store.state.isLoggedIn) {
+      await bookCar(form.value, store.state.uid);
+      formSuccess.value = "Car booked successfully";
+      resetForm();
+    } else {
+      redirectToLogin();
+    }
+  } else {
+    formError.value = "Car is not available at this time";
+  }
+};
+
+const resetForm = () => {
+  form.value = {
+    pickUpDate: "",
+    dropOffDate: "",
+    carId: "",
+    pickUpLocation: "",
+    dropOffLocation: "",
+  };
+};
+
+const redirectToLogin = () => {
+  route.push({
+    name: "Login",
+    query: {
+      filledForm: JSON.stringify(form.value),
+    },
+  });
 };
 
 const pickUpLocations = [
