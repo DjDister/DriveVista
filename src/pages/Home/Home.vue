@@ -1,16 +1,23 @@
-<script lang="ts">
-import Button from "../components/Button.vue";
-import ArrowRight from "../components/Icons/ArrowRight.vue";
-import { useCollection } from "vuefire";
-import { collection } from "firebase/firestore";
-import { db } from "../../firebase";
+<script lang="ts" setup>
+import ArrowRight from "../../components/Icons/ArrowRight.vue";
+import BookCarForm from "../../components/Forms/BookCarForm.vue";
+import InstructionsElem from "./InstructionsElem.vue";
+import CarPresentation from "./CarPresentation.vue";
+import FaqElem from "./FaqElem.vue";
+import { Car } from "../../../types";
+import getCars from "../../utils/getCars";
+import { onMounted, ref } from "vue";
+const cars = ref<Car[]>([]);
 
-const cars = useCollection(collection(db, "cars"));
-console.log(cars.value[0]);
-export default {
-  name: "Home",
-  components: { Button, ArrowRight },
+const fetchCars = async () => {
+  await getCars(6).then((res) => {
+    cars.value = res;
+  });
 };
+
+onMounted(() => {
+  fetchCars();
+});
 </script>
 
 <template>
@@ -39,10 +46,18 @@ export default {
       </div>
     </div>
     <div class="welcomeCarImgCont">
-      <img class="welcomeImg" src="../assets/images/welcomeCar.png" alt="car" />
-      <img class="bgCityImg" src="../assets/images/cityBg2.png" alt="city" />
+      <img
+        class="welcomeImg"
+        src="../../assets/images/welcomeCar.png"
+        alt="car"
+      />
+      <img class="bgCityImg" src="../../assets/images/cityBg2.png" alt="city" />
     </div>
   </div>
+  <BookCarForm :carTypes="cars" />
+  <InstructionsElem />
+  <CarPresentation :cars="cars" />
+  <FaqElem />
 </template>
 
 <style scoped>

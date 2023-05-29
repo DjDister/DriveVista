@@ -130,14 +130,21 @@ export default {
         router.push("/");
       }
     });
-
+    const filledFormFromNavigation = router.currentRoute.value.query.filledForm;
     const register = async () => {
       const registerError = await registerUser(formData);
 
       if (registerError) {
         formData.error = registerError;
       } else {
-        router.push("/");
+        filledFormFromNavigation
+          ? router.push({
+              name: "Home",
+              query: {
+                filledForm: filledFormFromNavigation,
+              },
+            })
+          : router.push("/");
       }
     };
 
@@ -146,7 +153,14 @@ export default {
       if (loginError) {
         formData.error = loginError;
       } else {
-        router.push("/");
+        filledFormFromNavigation
+          ? router.push({
+              name: "Home",
+              query: {
+                filledForm: filledFormFromNavigation,
+              },
+            })
+          : router.push("/");
       }
     };
 
