@@ -80,7 +80,7 @@ function loadStoreFromLocalStorage() {
   }
 }
 
-store.subscribe((mutation: any) => {
+store.subscribe(() => {
   saveStoreToLocalStorage();
 });
 
