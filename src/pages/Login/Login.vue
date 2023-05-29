@@ -87,9 +87,12 @@
         </div>
       </div>
     </div>
-    <div class="rightSide">
-      <div class="insideRight">
-        <img alt="loginImage" src="../../assets/images/welcomeCar.png" />
+    <div class="rightSide hideMobile">
+      <div class="insideRight hideMobile">
+        <img
+          alt="loginImage hideMobile"
+          src="../../assets/images/welcomeCar.png"
+        />
       </div>
     </div>
   </div>
@@ -185,6 +188,9 @@ export default {
 </script>
 
 <style scoped>
+.hideMobile {
+  display: none;
+}
 .wholePage {
   width: 100%;
   height: 100vh;
@@ -195,7 +201,7 @@ export default {
 }
 
 .leftSide {
-  width: 50%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -418,7 +424,6 @@ input {
 .rightSide {
   width: 50%;
   height: 100%;
-  display: flex;
   justify-content: center;
   align-items: center;
   object-fit: contain;
@@ -446,5 +451,13 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
   background-color: white;
   -webkit-box-shadow: 0 0 0 30px white inset;
+}
+@media screen and (min-width: 1000px) {
+  .leftSide {
+    width: 50%;
+  }
+  .hideMobile {
+    display: flex;
+  }
 }
 </style>
